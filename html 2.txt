@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PASTMASTER - Sri Lanka's #1 Past Paper Platform</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* =========================================
+           CSS VARIABLES & RESET
+        ========================================= */
+        :root {
+            --primary-blue: #0284c7;
+            --primary-blue-dark: #0369a1;
+            --light-blue-bg: #f0f9ff;
+            --light-blue-card: #e0f2fe;
+            --accent-blue: #38bdf8;
+            --text-dark: #0f172a;
+            --text-gray: #475569;
+            --text-light: #64748b;
+            --white: #ffffff;
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.07), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --radius: 16px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: var(--text-gray);
+            font-size: 1.05rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(2, 132, 199, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(2, 132, 199, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-blue);
+            color: var(--primary-blue);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-blue);
+            color: var(--white);
+        }
+
+        /* =========================================
+           HEADER & NAVIGATION
+        ========================================= */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+        }
+
+        .logo i {
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
+            color: white;
+            padding: 8px;
+            border-radius: 10px;
+            font-size: 1.2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            color: var(--text-gray);
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary-blue);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-blue);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-dark);
+        }
+
+        /* =========================================
+           HERO SECTION
+        ========================================= */
+        .hero {
+            padding: 160px 0 100px;
+            background: linear-gradient(135deg, var(--light-blue-bg) 0%, var(--white) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--light-blue-card);
+            color: var(--primary-blue);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-gray);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .search-container {
+            background: var(--white);
+            padding: 10px;
+            border-radius: 60px;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            border: 1px solid rgba(2, 132, 199, 0.1);
+        }
+
+        .search-container input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 15px 20px;
+            font-size: 1rem;
+            font-family: inherit;
+            color: var(--text-dark);
+            background: transparent;
+        }
+
+        .search-container input::placeholder {
+            color: var(--text-light);
+        }
+
+        .search-container button {
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .search-container button:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 15px rgba(2, 132, 199, 0.4);
+        }
+
+        .hero-stats-inline {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .hero-stats-inline div {
+            text-align: center;
+        }
+
+        .hero-stats-inline h3 {
+            font-size: 1.8rem;
+            color: var(--primary-blue);
+            font-weight: 700;
+        }
+
+        .hero-stats-inline p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        /* =========================================
+           CATEGORIES SECTION
+        ========================================= */
+        .categories {
+            padding: 100px 0;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .category-card {
+            background: var(--white);
+            border: 1px solid #e2e8f0;
+            border-radius: var(--radius);
+            padding: 40px 30px;
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--accent-blue));
+            transform: scaleX(0);
+            transition: var(--transition);
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            border-color: transparent;
+        }
+
+        .category-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .category-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--light-blue-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.8rem;
+            color: var(--primary-blue);
+            transition: var(--transition);
+        }
+
+        .category-card:hover .category-icon {
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
+            color: var(--white);
+            transform: scale(1.1);
+        }
+
+        .category-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .category-card p {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+        }
+
+        /* =========================================
+           LATEST PAPERS SECTION
+        ========================================= */
+        .latest-papers {
+            padding: 100px 0;
+            background: var(--light-blue-bg);
+        }
+
+        .papers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .paper-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .paper-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .paper-header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
+            padding: 20px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .paper-header .year {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .paper-header .type {
+            background: rgba(255,255,255,0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .paper-body {
+            padding: 25px;
+        }
+
+        .paper-body h3 {
+            font-size: 1.15rem;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .paper-meta {
+            display: flex;
+            gap: 15px;
+            color: var(--text-light);
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+        }
+
+        .paper-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .paper-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid #f1f5f9;
+        }
+
+        .download-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary-blue);
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .download-btn:hover {
+            gap: 12px;
+        }
+
+        /* =========================================
+           FEATURED SUBJECTS
+        ========================================= */
+        .subjects {
+            padding: 100px 0;
+        }
+
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+        }
+
+        .subject-pill {
+            background: var(--white);
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .subject-pill:hover {
+            border-color: var(--primary-blue);
+            background: var(--light-blue-bg);
+            transform: scale(1.05);
+        }
+
+        .subject-pill i {
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .subject-pill span {
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+        }
+
+        /* =========================================
+           STATISTICS SECTION
+        ========================================= */
+        .statistics {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-blue-dark));
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .statistics::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="2"/></svg>') repeat;
+            opacity: 0.5;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-item h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+
+        .stat-item p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+
+        /* =========================================
+           FOOTER
+        ========================================= */
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 80px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-about .logo {
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .footer-about p {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #94a3b8;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--primary-blue);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .footer-col h4 {
+            color: white;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a {
+            color: #94a3b8;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--accent-blue);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 30px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        /* =========================================
+           ANIMATIONS
+        ========================================= */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* =========================================
+           RESPONSIVE DESIGN
+        ========================================= */
+        @media (max-width: 992px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links, .nav-actions .btn {
+                display: none;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            /* Mobile Menu */
+            .nav-links.mobile-active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                padding: 20px;
+                box-shadow: var(--shadow-md);
+                gap: 20px;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .search-container {
+                flex-direction: column;
+                border-radius: 20px;
+                padding: 15px;
+            }
+
+            .search-container input {
+                width: 100%;
+                text-align: center;
+            }
+
+            .search-container button {
+                width: 100%;
+                justify-content: center;
+                margin-top: 10px;
+            }
+
+            .hero-stats-inline {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+            
+            .stat-item h2 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- =========================================
+         HEADER & NAVIGATION
+    ========================================= -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    PASTMASTER
+                </a>
+                
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#categories">Categories</a></li>
+                    <li><a href="#latest">Latest Papers</a></li>
+                    <li><a href="#subjects">Subjects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+
+                <div class="nav-actions">
+                    <a href="#" class="btn btn-primary" style="padding: 10px 20px; font-size: 0.85rem;">
+                        <i class="fas fa-user"></i> Login
+                    </a>
+                    <div class="hamburger" id="hamburger">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- =========================================
+         HERO SECTION
+    ========================================= -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <span class="hero-badge"><i class="fas fa-star"></i> Sri Lanka's #1 Educational Platform</span>
+                <h1>Your Success Starts With <span>Practice</span></h1>
+                <p>Access thousands of past papers, model papers, and marking schemes for G.C.E. O/L, A/L, and University entrance exams. Download, practice, and excel.</p>
+                
+                <div class="search-container">
+                    <input type="text" placeholder="Search past papers, subjects, or years..." id="searchInput">
+                    <button onclick="handleSearch()">
+                        <i class="fas fa-search"></i> Search
+                    </button>
+                </div>
+
+                <div class="hero-stats-inline">
+                    <div>
+                        <h3>10,000+</h3>
+                        <p>Past Papers</p>
+                    </div>
+                    <div>
+                        <h3>500+</h3>
+                        <p>Model Papers</p>
+                    </div>
+                    <div>
+                        <h3>50,000+</h3>
+                        <p>Active Students</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================
+         POPULAR CATEGORIES
+    ========================================= -->
+    <section class="categories" id="categories">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Popular Examination Categories</h2>
+                <p>Browse past papers by your examination level. We cover all major national exams in Sri Lanka.</p>
+            </div>
+
+            <div class="categories-grid">
+                <div class="category-card fade-in">
+                    <div class="category-icon"><i class="fas fa-child"></i></div>
+                    <h3>Grade 5 Scholarship</h3>
+                    <p>Access past papers and model tests for the Grade 5 scholarship examination.</p>
+                </div>
+                <div class="category-card fade-in">
+                    <div class="category-icon"><i class="fas fa-book-open"></i></div>
+                    <h3>G.C.E. Ordinary Level</h3>
+                    <p>Complete collection of O/L past papers, marking schemes, and model papers.</p>
+                </div>
+                <div class="category-card fade-in">
+                    <div class="category-icon"><i class="fas fa-university"></i></div>
+                    <h3>G.C.E. Advanced Level</h3>
+                    <p>Physical, Biological, Commerce, and Arts stream A/L past papers & resources.</p>
+                </div>
+                <div class="category-card fade-in">
+                    <div class="category-icon"><i class="fas fa-award"></i></div>
+                    <h3>University Entrance</h3>
+                    <p>Preparation materials for university admission tests and scholarships.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================
+         LATEST UPLOADED PAPERS
+    ========================================= -->
+    <section class="latest-papers" id="latest">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Latest Uploaded Papers</h2>
+                <p>Stay updated with the most recently added past papers and model papers.</p>
+            </div>
+
+            <div class="papers-grid">
+                <!-- Paper Card 1 -->
+                <div class="paper-card fade-in">
+                    <div class="paper-header">
+                        <span class="year">2024</span>
+                        <span class="type">A/L Past Paper</span>
+                    </div>
+                    <div class="paper-body">
+                        <h3>Combined Mathematics - Paper I & II</h3>
+                        <div class="paper-meta">
+                            <span><i class="fas fa-file-pdf"></i> PDF</span>
+                            <span><i class="fas fa-clock"></i> Uploaded 2 days ago</span>
+                        </div>
+                        <div class="paper-footer">
+                            <a href="#" class="download-btn">Download <i class="fas fa-arrow-right"></i></a>
+                            <span style="color: var(--text-light); font-size: 0.85rem;"><i class="fas fa-download"></i> 1.2k</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Paper Card 2 -->
+                <div class="paper-card fade-in">
+                    <div class="paper-header">
+                        <span class="year">2023</span>
+                        <span class="type">O/L Model Paper</span>
+                    </div>
+                    <div class="paper-body">
+                        <h3>Science - Model Paper 01 (With Marks)</h3>
+                        <div class="paper-meta">
+                            <span><i class="fas fa-file-pdf"></i> PDF</span>
+                            <span><i class="fas fa-clock"></i> Uploaded 5 days ago</span>
+                        </div>
+                        <div class="paper-footer">
+                            <a href="#" class="download-btn">Download <i class="fas fa-arrow-right"></i></a>
+                            <span style="color: var(--text-light); font-size: 0.85rem;"><i class="fas fa-download"></i> 3.4k</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Paper Card 3 -->
+                <div class="paper-card fade-in">
+                    <div class="paper-header">
+                        <span class="year">2024</span>
+                        <span class="type">O/L Past Paper</span>
+                    </div>
+                    <div class="paper-body">
+                        <h3>Mathematics - Past Paper & Marking Scheme</h3>
+                        <div class="paper-meta">
+                            <span><i class="fas fa-file-pdf"></i> PDF</span>
+                            <span><i class="fas fa-clock"></i> Uploaded 1 week ago</span>
+                        </div>
+                        <div class="paper-footer">
+                            <a href="#" class="download-btn">Download <i class="fas fa-arrow-right"></i></a>
+                            <span style="color: var(--text-light); font-size: 0.85rem;"><i class="fas fa-download"></i> 5.8k</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================
+         FEATURED SUBJECTS
+    ========================================= -->
+    <section class="subjects" id="subjects">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Featured Subjects</h2>
+                <p>Quickly navigate to the subject you need to study.</p>
+            </div>
+
+            <div class="subjects-grid">
+                <div class="subject-pill fade-in"><i class="fas fa-calculator"></i><span>Mathematics</span></div>
+                <div class="subject-pill fade-in"><i class="fas fa-flask"></i><span>Science</span></div>
+                <div class="subject-pill fade-in"><i class="fas fa-landmark"></i><span>History</span></div>
+                <div class="subject-pill fade-in"><i class="fas fa-globe-americas"></i><span>English</span></div>
+                <div class="subject-pill fade-in"><i class="fas fa-laptop-code"></i><span>ICT</span></div>
+                <div class="subject-pill fade-in"><i class="fas fa-chart-line"></i><span>Business</span></div>
+                <div class="subject-pill fade-in"><i class="fas fa-atom"></i><span>Physics</span></div>
+                <div class="subject-pill fade-in"><i class="fas fa-dna"></i><span>Biology</span></div>
+                <div class="subject-pill fade-in"><i class="fas fa-atom"></i><span>Chemistry</span></div>
+                <div class="subject-pill fade-in"><i class="fas fa-book"></i><span>Sinhala</span></div>
+                <div class="subject-pill fade-in"><i class="fas fa-book"></i><span>Tamil</span></div>
+                <div class="subject-pill fade-in"><i class="fas fa-map"></i><span>Geography</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================
+         STATISTICS SECTION
+    ========================================= -->
+    <section class="statistics">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item fade-in">
+                    <h2 class="counter" data-target="15000">0</h2>
+                    <p>Past Papers Available</p>
+                </div>
+                <div class="stat-item fade-in">
+                    <h2 class="counter" data-target="2500">0</h2>
+                    <p>Model Papers</p>
+                </div>
+                <div class="stat-item fade-in">
+                    <h2 class="counter" data-target="85000">0</h2>
+                    <p>Happy Students</p>
+                </div>
+                <div class="stat-item fade-in">
+                    <h2 class="counter" data-target="1200000">0</h2>
+                    <p>Total Downloads</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================
+         FOOTER
+    ========================================= -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <a href="#" class="logo">
+                        <i class="fas fa-graduation-cap"></i>
+                        PASTMASTER
+                    </a>
+                    <p>Empowering Sri Lankan students with free, easy access to past examination papers and educational resources. Your success is our mission.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">O/L Papers</a></li>
+                        <li><a href="#">A/L Papers</a></li>
+                        <li><a href="#">Model Papers</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Contact Info</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope" style="margin-right: 8px; color: var(--accent-blue);"></i> info@pastmaster.lk</li>
+                        <li><i class="fas fa-phone" style="margin-right: 8px; color: var(--accent-blue);"></i> +94 11 234 5678</li>
+                        <li><i class="fas fa-map-marker-alt" style="margin-right: 8px; color: var(--accent-blue);"></i> Colombo, Sri Lanka</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 PASTMASTER. All Rights Reserved. Designed for the students of Sri Lanka.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- =========================================
+         JAVASCRIPT
+    ========================================= -->
+    <script>
+        // =========================================
+        // Mobile Navigation Toggle
+        // =========================================
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('mobile-active');
+            const icon = hamburger.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        // Close mobile menu when a link is clicked
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('mobile-active');
+                const icon = hamburger.querySelector('i');
+                icon.classList.add('fa-bars');
+                icon.classList.remove('fa-times');
+            });
+        });
+
+        // =========================================
+        // Search Functionality (Demo)
+        // =========================================
+        function handleSearch() {
+            const query = document.getElementById('searchInput').value;
+            if(query.trim() !== "") {
+                alert(`Searching for: "${query}"\n\n(In a real app, this would filter and show matching past papers.)`);
+            } else {
+                alert('Please enter a subject, year, or exam type to search.');
+            }
+        }
+
+        // Allow pressing 'Enter' in search bar
+        document.getElementById('searchInput').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                handleSearch();
+            }
+        });
+
+        // =========================================
+        // Scroll Animations (Intersection Observer)
+        // =========================================
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Trigger counter animation if it's a stat item
+                    if (entry.target.classList.contains('stat-item')) {
+                        animateCounters(entry.target);
+                    }
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // =========================================
+        // Animated Counters for Statistics
+        // =========================================
+        let countersAnimated = false;
+
+        function animateCounters(parentElement) {
+            if (countersAnimated) return;
+            
+            const counters = parentElement.querySelectorAll('.counter');
+            if (counters.length === 0) return;
+
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const duration = 2000; // 2 seconds
+                const step = target / (duration / 16); // 60fps
+                let current = 0;
+
+                const updateCounter = () => {
+                    current += step;
+                    if (current < target) {
+                        counter.innerText = Math.ceil(current).toLocaleString() + '+';
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.innerText = target.toLocaleString() + '+';
+                    }
+                };
+
+                updateCounter();
+            });
+            
+            countersAnimated = true;
+        }
+
+        // =========================================
+        // Active Navigation Link on Scroll
+        // =========================================
+        const sections = document.querySelectorAll('section');
+        const navItems = document.querySelectorAll('.nav-links a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === `#${current}`) {
+                    item.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
